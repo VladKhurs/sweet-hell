@@ -1,0 +1,8 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">  
+  <g filter="url(#glow)" transform="rotate(25 20 20)">
+    <path d="M 20,20 L 20,0 A 20,20 0 0,1 40,20 Z" fill="#ff6cb6"/>
+    <path d="M 20,20 L 40,20 A 20,20 0 0,1 20,40 Z" fill="#ffa7d1"/>
+    <path d="M 20,20 L 20,40 A 20,20 0 0,1 0,20 Z" fill="#b788e5"/>
+    <path d="M 20,20 L 0,20 A 20,20 0 0,1 20,0 Z" fill="#cb2c36"/>
+  </g>
+</svg>
