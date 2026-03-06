@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Press Start 2P', cursive;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #66225b 0%, #cb2c36 50%, #ff6cb6 100%);
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255, 166, 209, 0.1) 0px,
+      rgba(255, 166, 209, 0.1) 4px,
+      rgba(203, 44, 54, 0.1) 4px,
+      rgba(203, 44, 54, 0.1) 8px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+@layer components {
+  /* Адски-сладкая рамка */
+  .hell-sweet-border {
+    box-shadow: 
+      0 -4px 0 0 #66225b,
+      0 4px 0 0 #cb2c36,
+      -4px 0 0 0 #b788e5,
+      4px 0 0 0 #ff6cb6,
+      0 0 0 4px #fbe6bf;
+    border: 2px solid #ffa7d1;
+    position: relative;
+    background: linear-gradient(145deg, #4d4d4d, #66225b);
+    transition: all 0.3s ease;
+  }
+
+  .hell-sweet-border:hover {
+    box-shadow: 
+      0 -6px 0 0 #66225b,
+      0 6px 0 0 #cb2c36,
+      -6px 0 0 0 #b788e5,
+      6px 0 0 0 #ff6cb6,
+      0 0 0 6px #fbe6bf;
+    transform: translateY(-2px);
+  }
+
+  /* Конфетный градиент для текста */
+  .candy-text {
+    background: linear-gradient(45deg, #ff6cb6, #ffa7d1, #b788e5, #cb2c36);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: candy-shine 3s linear infinite;
+  }
+
+  @keyframes candy-shine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Леденцовая кнопка */
+  .lollipop-button {
+    background: linear-gradient(135deg, #ff6cb6, #ffa7d1);
+    border: 3px solid #fbe6bf;
+    color: #66225b;
+    padding: 12px 24px;
+    position: relative;
+    box-shadow: 
+      0 -4px 0 0 #b788e5,
+      0 4px 0 0 #cb2c36,
+      -4px 0 0 0 #4d4d4d,
+      4px 0 0 0 #66225b;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 2px 2px 0 #fbe6bf;
+  }
+
+  .lollipop-button:hover {
+    transform: scale(1.05) rotate(-1deg);
+    background: linear-gradient(135deg, #ffa7d1, #ff6cb6);
+    box-shadow: 
+      0 -6px 0 0 #b788e5,
+      0 6px 0 0 #cb2c36,
+      -6px 0 0 0 #4d4d4d,
+      6px 0 0 0 #66225b;
+  }
+
+  /* Пиксельный леденец */
+  .pixel-lollipop {
+    width: 40px;
+    height: 40px;
+    background: conic-gradient(
+      from 90deg,
+      #ff6cb6 0deg 90deg,
+      #ffa7d1 90deg 180deg,
+      #b788e5 180deg 270deg,
+      #cb2c36 270deg 360deg
+    );
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 20px #ff6cb6;
+    animation: lollipop-spin 4s linear infinite;
+  }
+
+  .pixel-lollipop::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 18px;
+    width: 4px;
+    height: 30px;
+    background: linear-gradient(90deg, #4d4d4d, #66225b);
+    box-shadow: 2px 2px 0 #b788e5;
+  }
+
+  @keyframes lollipop-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Адское пламя */
+  .hell-flame {
+    position: relative;
+    color: #fbe6bf;
+    text-shadow: 
+      0 0 10px #cb2c36,
+      0 0 20px #ff6cb6,
+      0 0 40px #ffa7d1,
+      0 0 80px #b788e5;
+    animation: flicker 2s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; text-shadow: 0 0 30px #ff6cb6, 0 0 60px #cb2c36; }
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float linear infinite;
+}
