@@ -3,9 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  build: {
-    outDir: 'build'
-  },
+  base: "/sweet-hell/",
   plugins: [
     react(),
     tailwindcss(),

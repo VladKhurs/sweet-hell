@@ -6,7 +6,7 @@ import ItemPage from './pages/ItemPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/sweet-hell">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
