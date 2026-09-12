@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {/* Адски-сладкий заголовок */}
+            {/* Адски-сладкий заголовок */}
       <div className="text-center mb-16 relative">
         <h1 
           className="text-5xl md:text-7xl font-bold mb-6 mt-5 relative inline-block hell-flame"
@@ -37,11 +37,14 @@ const Home = () => {
         <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-gradient-to-r from-[#cb2c36] via-[#ff6cb6] to-[#b788e5] blur-xl opacity-50" />
       </div>
 
-      <button
-      className="hell-sweet-border cursor-pointer text-xl mt-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.9)] font-bold mb-3 candy-text tracking-wider"
-      
-      >
-        Играть!</button>  
+<button
+  className="lollipop-button text-l font-bold block mx-auto mt-16 mb-16 scale-140"
+  onClick={() => navigate('/game')}
+>
+  Играть!
+</button>
+
+
 
       {/* Сетка категорий */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">

@@ -27,10 +27,6 @@ const CategoryCard = ({ icon, title, description, onClick }) => {
       {/* Конфетный градиент на фоне */}
       <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryGradient(title)} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
 
-      {/* Пиксельные леденцы на фоне */}
-      <div className="absolute top-2 right-2 w-8 h-8 opacity-20 group-hover:opacity-40 transition-opacity">
-        <div className="pixel-lollipop scale-50" />
-      </div>
 
       {/* Иконка с адским свечением */}
       {

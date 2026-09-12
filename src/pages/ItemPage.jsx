@@ -10,7 +10,7 @@ const ItemPage = () => {
   if (!item) {
     return (
       <div className="text-center py-20">
-        <div className="text-8xl mb-4 hell-flame">👹</div>
+        <div className="text-8xl mb-4">👹</div>
         <h2 className="text-2xl candy-text mb-4">ITEM NOT FOUND</h2>
         <div className="pixel-lollipop mx-auto animate-spin" style={{ animationDuration: '3s' }} />
       </div>
@@ -19,11 +19,6 @@ const ItemPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto relative">
-      {/* Леденец в углу */}
-      <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 hidden lg:block">
-        <div className="pixel-lollipop animate-spin" style={{ animationDuration: '8s' }} />
-      </div>
-
       {/* Заголовок с конфетным градиентом */}
       <h1 className="text-3xl drop-shadow-[0_1.2px_2.7px_rgba(0,0,0,0.9)] md:text-5xl font-bold mb-8 candy-text leading-tight text-center">
         {item.title}
@@ -78,7 +73,7 @@ const ItemPage = () => {
 
         {item.dialogues && item.dialogues.length > 0 && (
           <div className="mt-12">
-            <h3 className="text-xl text-[#ff6cb6] mb-6 hell-flame text-center">
+            <h3 className="text-xl text-[#ff6cb6] mb-6 text-center">
               🎭 ДИАЛОГИ 🎭
             </h3>
             <DialogueBox dialogues={item.dialogues} />

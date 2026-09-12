@@ -9,7 +9,6 @@
 
   body {
     font-family: 'Press Start 2P', cursive;
-    image-rendering: pixelated;
     image-rendering: crisp-edges;
     overflow-x: hidden;
     background: linear-gradient(135deg, #66225b 0%, #cb2c36 50%, #ff6cb6 100%);
@@ -157,7 +156,7 @@
       0 0 20px #ff6cb6,
       0 0 40px #ffa7d1,
       0 0 80px #b788e5;
-    animation: flicker 2s infinite;
+    animation: flicker 3s infinite;
   }
 
   @keyframes flicker {
