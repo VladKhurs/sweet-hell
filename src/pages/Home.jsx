@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import CategoryCard from '../components/CategoryCard';
 import { getCategories } from '../data/gameData';
+import { useEffect } from 'react';
 
 const Home = () => {
   const navigate = useNavigate();
