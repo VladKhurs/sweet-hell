@@ -1,0 +1,129 @@
+Отлично! Ты успешно создал базовые компоненты.
+
+Теперь Этап 2. Мы добавим нашему <Player /> локальный стейт (состояние) и
+обработчики событий клавиатуры. В React ты бы использовал useState и
+onKeyDown, а для анимации перемещения — CSS-транзишены. В Godot для стейта
+используются обычные переменные скрипта, а для "CSS-транзишенов" — мощный
+встроенный инструмент Tween.
+
+Шаг 1. Настройка кнопок (Input Map)
+
+Вместо того чтобы хардкодить клавиши (например, "пробел"), в Godot принято
+создавать логические "Экшены". Это полезно, если ты потом захочешь
+добавить поддержку геймпада.
+
+1.  Иди в Проект -> Настройки проекта.
+2.  Открой вкладку Список действий (Input Map).
+3.  В строке "Добавить новое действие" напиши move_forward и нажми Enter (или
+    кнопку "Добавить").
+4.  Таким же образом создай еще три действия: attack_forward, attack_up,
+    attack_down.
+5.  Теперь привяжем к ним кнопки. В списке ниже найди move_forward, нажми на
+    Плюсик справа от него, нажми на клавиатуре Пробел (Space) и подтверди
+    (ОК).
+6.  Для attack_forward добавь Стрелку Вправо.
+7.  Для attack_up добавь Стрелку Вверх.
+8.  Для attack_down добавь Стрелку Вниз.
+9.  Закрой настройки.
+
+Шаг 2. Создаем скрипт Игрока (Логика компонента)
+
+1.  Открой сцену player.tscn.
+2.  Выдели корневой узел Player (CharacterBody2D) и нажми кнопку "Прикрепить
+    скрипт" (иконка свитка с зеленым плюсиком прямо над деревом узлов).
+3.  Оставь всё по умолчанию и нажми "Создать". Откроется редактор кода.
+
+Шаг 3. Пишем код (GDScript)
+
+Удали всё, что там есть, и вставь этот код. Я оставил комментарии с аналогиями
+из React, чтобы тебе было кристально понятно, что тут происходит:
+
+extends CharacterBody2D
+
+# --- КОНСТАНТЫ (настройки нашего компонента) ---
+const CELL_SIZE = 32.0 # Размер одной клетки в пикселях
+const MOVE_DURATION = 0.15 # Время перемещения (как transition-duration в CSS)
+
+# --- STATE (Аналог useState) ---
+enum State { IDLE, MOVING, ATTACKING }
+var current_state = State.IDLE
+
+# Ссылка на наш дочерний элемент (как useRef), чтобы менять ему цвет
+@onready var color_rect = $ColorRect 
+
+# Сохраняем изначальный цвет
+@onready var original_color = color_rect.color 
+
+# --- ОБРАБОТЧИК СОБЫТИЙ (Аналог onKeyDown) ---
+# Эта встроенная функция вызывается каждый раз, когда игрок жмет кнопку
+func _unhandled_input(event):
+ # Если мы сейчас в движении или бьем - игнорируем новые нажатия
+ if current_state != State.IDLE:
+  return
+  
+ if event.is_action_pressed("move_forward"):
+  move_player()
+ elif event.is_action_pressed("attack_forward"):
+  attack("forward")
+ elif event.is_action_pressed("attack_up"):
+  attack("up")
+ elif event.is_action_pressed("attack_down"):
+  attack("down")
+
+# --- ЛОГИКА ДВИЖЕНИЯ ---
+func move_player():
+ current_state = State.MOVING # setState(MOVING)
+ 
+ var target_x = position.x + CELL_SIZE
+ 
+ # Tween - это математический аниматор, аналог CSS Transitions
+ var tween = create_tween()
+ # Плавно меняем свойство position.x на target_x за MOVE_DURATION секунд
+ tween.tween_property(self, "position:x", target_x, MOVE_DURATION)
+ 
+ # Когда анимация закончится, вызываем функцию set_idle (аналог onAnimationEnd)
+ tween.tween_callback(set_idle)
+
+# --- ЛОГИКА УДАРА ---
+func attack(direction):
+ current_state = State.ATTACKING # setState(ATTACKING)
+ 
+ # В будущем здесь будут анимации спрайта. 
+ # Пока что сделаем визуальный фидбек цветом.
+ if direction == "forward":
+  color_rect.color = Color.HOT_PINK
+ elif direction == "up":
+  color_rect.color = Color.WHITE
+ elif direction == "down":
+  color_rect.color = Color.PURPLE
+  
+ # Ждем 0.2 секунды (имитация длительности удара). Это как setTimeout.
+ await get_tree().create_timer(0.2).timeout
+ 
+ # Возвращаем старый цвет и состояние
+ color_rect.color = original_color
+ set_idle()
+
+# Функция сброса состояния
+func set_idle():
+ current_state = State.IDLE
+
+Шаг 4. Тестируем!
+
+1.  Сохрани скрипт (Ctrl+S).
+2.  Запусти игру (F5).
+3.  Нажимай Пробел. Игрок должен четко и плавно "прыгать" ровно на 32 пикселя
+    вправо. Пока он прыгает, нажать пробел еще раз нельзя (State Machine
+    работает!).
+4.  Нажимай стрелки (Вверх, Вниз, Вправо). Игрок будет замирать на долю секунды
+    (меняя цвет), имитируя удар.
+
+Итог Этапа 2: У нас есть контроллер, который жестко привязан к сетке и
+состояниям.
+
+В Этапе 3 начнется самое интересное (и самое сложное). Мы напишем глобальный
+"Провайдер" ритма (Синглтон Conductor). Мы загрузим музыку и сделаем так,
+чтобы двигаться и бить можно было только попав в такт (Beats Per Minute)
+музыки.
+
+Жду твоего сигнала: "Всё работает, переходим к Этапу 3"!

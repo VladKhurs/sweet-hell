@@ -77,6 +77,10 @@
     animation: candy-shine 3s linear infinite;
   }
 
+  #canvas {
+    height: 300px;
+  }
+
   @keyframes candy-shine {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }

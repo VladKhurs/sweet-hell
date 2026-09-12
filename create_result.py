@@ -2,7 +2,7 @@ import os
 
 def create_combined_file():
     ignored_extensions = ['.png', '.svg', '.webp', '.jpg', '.pdf', '.mp4', '.txt', '.ico', '.docx', '.sql', '.log']
-    ignored_directories = ['.git', 'node_modules', '.qodo', 'frontend', 'logs']
+    ignored_directories = ['.git', 'node_modules', '.qodo', 'frontend', 'logs', 'public', 'dist', 'data', 'assets', 'concepts']
     ignored_files = ['package-lock.json', '.gitignore', '.browserslistrc', 'result.txt', 'create_result.py']
     output_filename = 'result.txt'
 

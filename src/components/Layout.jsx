@@ -30,7 +30,7 @@ const Layout = () => {
         ))}
       </div>
       
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto min-h-[100vh] px-4 py-8 relative z-10">
         {showBackButton && <BackButton onClick={() => navigate(-1)} />}
         <Outlet />
       </div>

@@ -1,0 +1,173 @@
+я React.js разработчик. я впервые открыл godot и хочу сделать игру "Sweet Hell"
+- стилистика сладкого ада, где черти палвают в карамели и расцветка розовая и
+фиолетовая. Sweet Hell - 2d пиксельную игру с переключением управления между
+видом между видом сбоку (платформер) и видом сверху (как в rpg maker),
+переключение происходит в зависимости от локаций и места где находится
+игрок. хочу чтобы можно было легко добавлять разные мини игры, читать диалоги
+и делать выборы диалогов, читать режим новеллы.
+
+Надо архитектурно заложить чтобы было чегко разрабатывать эти механики. Напиши
+мне план по которому я буду это разрабатывать и чтобы при следующем запросе мы
+с тобой начали делать эту игру
+
+Привет! Как React-разработчику, тебе будет очень комфортно в Godot, если ты
+поймешь главную концепцию: Сцены (Scenes) и Узлы (Nodes) в Godot — это как
+Компоненты (Components) в React.
+
+Они инкапсулируют логику, могут вкладываться друг в друга, принимают "пропсы" (в
+Godot это @export переменные) и общаются через "колбеки" (в Godot это Сигналы /
+Signals). Для глобального стейта (как Redux или Context API) в Godot
+используются Автозагрузки (Autoloads / Singletons).
+
+Твоя идея "Sweet Hell" звучит потрясающе! Карамельный ад с демонами — это
+отличный визуальный контраст.
+
+Чтобы архитектурно заложить базу для смены видов (топ-даун / платформер),
+мини-игр и визуальной новеллы, нам нужен строгий модульный подход. Вот
+пошаговый план, по которому мы будем строить игру.
+
+Архитектурный план разработки "Sweet Hell"
+
+Этап 1: Базовая архитектура и Глобальный Стейт (Global State)
+
+React-аналог: Настройка Redux/Context и роутера.
+
+1.  Структура папок: Создадим понятную структуру (уровни, акторы, UI,
+    мини-игры).
+2.  GameManager (Autoload): Глобальный скрипт, который будет хранить состояние
+    игры (здоровье, инвентарь, текущий уровень, выборы в диалогах).
+3.  SceneManager (Autoload): Скрипт для плавного переключения между локациями (с
+    затемнением экрана).
+
+Этап 2: Два вида управления (Платформер и Top-Down)
+
+React-аналог: Два разных компонента, которые рендерятся в зависимости от
+страницы. Мы не будем делать одного универсального монстра-игрока. Мы
+сделаем два разных компонента (сцены):
+
+1.  PlayerPlatformer: Сцена игрока с гравитацией, прыжками и физикой падения в
+    карамель.
+2.  PlayerTopDown: Сцена игрока с перемещением в 4/8 направлениях без гравитаци.
+3.  Родительские классы уровней: Создадим BaseLevelPlatformer и
+    BaseLevelTopDown. При переходе из одной комнаты в другую, игра просто
+    загружает нужный тип уровня с нужным типом игрока.
+
+Этап 3: Интеграция Нарратива (Диалоги и Визуальная новелла)
+
+Секретное оружие Godot: Мы не будем писать это с нуля. Мы используем плагин
+Dialogic 2 (он бесплатный и является стандартом для Godot).
+
+1.  Установка и настройка Dialogic.
+2.  Создание компонента Interactable (зона, куда игрок подходит и нажимает "Е").
+3.  Связка: при запуске диалога GameManager ставит игру на паузу (блокирует
+    управление), а после завершения — отпускает. Диалоги будут возвращать
+    переменные (например, выбор игрока) в наш GameManager.
+
+Этап 4: Модульные Мини-игры
+
+React-аналог: Модальные окна с независимой логикой.
+
+1.  Создадим базовую сцену MiniGameBase.
+2.  Логика: игрок подходит к котлу с карамелью -> управление блокируется ->
+    поверх экрана загружается сцена мини-игры (например, ритм-игра или
+    кликер) -> мини-игра отдает Сигнал (Signal) game_finished(score) ->
+    сцена мини-игры удаляется -> игрок получает награду.
+
+Этап 5: Окружение и стилистика (Sweet Hell)
+
+1.  TileMaps (Тайл-мапы): Настроим сетку для рисования уровней (розовые скалы,
+    фиолетовая лава, платформы из печенья).
+2.  Шейдеры: Сделаем простенький эффект волн для карамельной лавы.
+3.  Анимации: Настроим AnimationPlayer для чертиков и главного героя.
+
+Этап 6: Полировка
+
+1.  Главное меню, меню паузы.
+2.  Сохранение и загрузка игры (сохранение стейта GameManager в JSON).
+3.  Звуки и музыка.
+
+Как мы будем работать дальше?
+
+Поскольку ты новичок в Godot, но опытный разработчик, я буду объяснять логику
+через код (GDScript очень похож на Python и легко читается после JS/TS) и
+объяснять, куда именно кликать в интерфейсе.
+
+Для следующего запроса напиши мне:
+
+"Я готов. Давай начнем с Этапа 1: Создание проекта, структура папок и настройка
+GameManager (Глобального стейта)."
+
+Перед этим убедись, что у тебя скачан Godot 4.2 или 4.3 (версия .NET не
+обязательна, будем писать на родном GDScript, он идеален для 2D). Готов
+начать спуск в Сладкий Ад? 😈🍬
+
+
+-------
+
+
+
+сейчас июнь 2026, текущаю последняя версия годота 4.7
+
+в файле game-data я прикрепил всё что касается игры. хорошенько подумай и пойми стоит ди менять план разработки на основании новой информации, если план разработки стоит менять, то обнови план
+
+------
+
+
+
+
+Considering the User's Intent
+
+I'm starting by analyzing the user's request. It's clear they are a React.js
+developer new to Godot, looking for advice on a 2D pixel art game, tentatively
+titled "Sweet Hell," and candy-themed. This provides a focused starting point
+for my understanding.
+
+Analyzing Game Data
+
+I've begun reviewing the provided game-data.txt file. The character details for
+Lumi, GG, Temmie, and Edgar are insightful. I'm focusing on how this new
+information will affect the core mechanics and input constraints outlined
+previously, particularly the RPG Maker/Platformer switching, the morality
+system, and the modular mini-games in the context of a 2026 setting using
+Godot 4.7.
+
+Evaluating Level Design
+
+I'm now examining the level design implications derived from these locations and
+mechanics. The day/night cycle will trigger events, and morality influences
+character transformations and endings. I see different versions of "hell" via
+color palettes and NPC personalities, and how portals connect distinct areas,
+each with tailored mini-games. This adds rich game design potential.
+
+Refining Technical Aspects
+
+I'm now diving into the technical specifics. State management needs a serious
+upgrade to track "Hell Versions," GG's "Demon Level," and time-based events.
+Dialogic looks good for dialogue, but I'll make sure it tightly integrates with
+the morality system. I'm also planning for dynamic visual changes using shaders
+and global variables. I'm also seeing clearly how modular mini-game loading will
+be crucial for the variety. The Top-Down and Platformer mix is confirmed as
+well. I'll make sure to acknowledge the 2026 and Godot 4.7 setting appropriately
+in the response.
+
+Updating the Global State
+
+I'm thrilled with the new additions! I've reorganized my plan and have started
+refining the architecture. I'm focusing on the GameState which tracks the
+player's morality and the "Hell Version," also setting up the day/night cycle.
+I'm building a system to handle GG's visual transformations, with a player scene
+and a state machine for these changes. I'm making sure that "Insult vs. Hit"
+mechanic is closely integrated with the narrative.
+
+Refining Visual Themes
+
+I'm now implementing palette swapping via a "ThemeProvider" concept, drawing
+inspiration from React, to represent the "Caramel/Mint/Overcooked" states.
+
+\n\n
+
+My current focus is on modular mini-games; I'm fleshing out ideas for PvZ,
+bullet hell (avalanche), and QTE interactions, especially during the "Night"
+sequences. I'm also connecting environments, like Crying Skull and the Tavern,
+through portal systems that check player inventory and game state for
+transitions.
