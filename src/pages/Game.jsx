@@ -3,7 +3,8 @@ const Game = () => {
     <iframe
       src="/sweet-hell/game/index.html"
       title="My Godot Game"
-      className="fixed inset-0 w-screen h-screen z-50 border-0 m-0 p-0"
+      /* h-[100dvh] учитывает адресную строку на смартфонах и не дает низу уползать */
+      className="fixed inset-0 w-full h-[100dvh] z-50 border-0 m-0 p-0 bg-black"
       allow="autoplay; fullscreen"
     />
   );
