@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter basename="/sweet-hell">
       <Routes>
+        <Route path="game" element={<Game />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="category/:categoryId" element={<Category />} />
-          <Route path="game" element={<Game />} />
           <Route path="category/:categoryId/:itemId" element={<ItemPage />} />
         </Route>
       </Routes>

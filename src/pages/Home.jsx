@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import CategoryCard from '../components/CategoryCard';
+import { ITCH_IO_URL } from '../config/release';
 import { getCategories } from '../data/gameData';
-import { useEffect } from 'react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -44,8 +44,11 @@ const Home = () => {
 >
   Играть!
 </button>
-
-
+      {ITCH_IO_URL && (
+        <a className="lollipop-button inline-block mb-14" href={ITCH_IO_URL} target="_blank" rel="noopener noreferrer">
+          ITCH.IO
+        </a>
+      )}
 
       {/* Сетка категорий */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">

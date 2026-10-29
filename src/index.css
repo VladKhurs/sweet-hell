@@ -76,10 +76,6 @@
     animation: candy-shine 3s linear infinite;
   }
 
-  #canvas {
-    height: 300px;
-  }
-
   @keyframes candy-shine {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -178,4 +174,107 @@
 
 .animate-float {
   animation: float linear infinite;
+}
+/* Release 0.18: full-viewport Godot embed. Keep the site's pixel visual language. */
+.game-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #190c25;
+  color: #fbe6bf;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+}
+.game-toolbar {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  border-bottom: 3px solid #b788e5;
+  background: #66225b;
+}
+.game-toolbar-title {
+  color: #fbe6bf;
+  font-size: 13px;
+  text-shadow: 3px 3px 0 #cb2c36;
+  line-height: 1.8;
+}
+.game-toolbar-actions, .game-confirm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.game-control-button {
+  min-height: 36px;
+  padding: 9px 11px;
+  background: #ff6cb6;
+  border: 2px solid #fbe6bf;
+  box-shadow: 3px 3px 0 #cb2c36;
+  color: #391b46;
+  font: inherit;
+  font-size: 9px;
+  line-height: 1.3;
+  cursor: pointer;
+}
+.game-control-button:hover, .game-control-button:focus-visible {
+  background: #ffa7d1;
+}
+.game-control-button:focus-visible { outline: 3px solid #fbe6bf; outline-offset: 3px; }
+.game-control-danger { background: #f69a99; }
+.game-stage {
+  min-height: 0;
+  flex: 1 1 auto;
+  background: #000;
+}
+.game-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+.game-footer {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border-top: 2px solid #b788e5;
+  background: #2e193c;
+  font-size: 8px;
+  line-height: 1.6;
+}
+.game-error { display: block; color: #ffa7d1; }
+.game-confirm-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(14, 4, 22, 0.85);
+}
+.game-confirm-panel {
+  width: min(100%, 490px);
+  padding: 23px 20px;
+  background: #4b2059;
+  border: 4px solid #ffa7d1;
+  box-shadow: 6px 6px 0 #cb2c36;
+}
+.game-confirm-panel h2 { font-size: 13px; line-height: 1.8; }
+.game-confirm-panel p { font-size: 10px; line-height: 2.1; margin: 17px 0 23px; }
+@media (max-width: 720px) {
+  .game-toolbar { padding: 7px; gap: 6px; justify-content: center; }
+  .game-toolbar-title { display: none; }
+  .game-control-button { font-size: 8px; padding: 7px; min-height: 32px; }
+  .game-footer { font-size: 7px; padding: 5px 8px; }
 }
